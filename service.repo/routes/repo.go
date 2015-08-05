@@ -3,13 +3,15 @@ package routes
 import (
 	"net/http"
 
+	. "github.com/agencyrevolution/go-microservices-example/models"
+
 	"github.com/agencyrevolution/go-microservices-example/service.repo/store"
 	"github.com/gin-gonic/gin"
 )
 
 func AddRepoRoutes(s *store.Engine, r *gin.Engine) {
 	r.GET("/users/:username/repos", func(c *gin.Context) {
-		var repos []*store.Repo
+		var repos []*Repo
 
 		for _, repo := range s.State.Repos {
 			if repo.RepoOwner.Username == c.Param("username") {
@@ -21,7 +23,7 @@ func AddRepoRoutes(s *store.Engine, r *gin.Engine) {
 	})
 
 	r.GET("/users/:username/repos/:reponame", func(c *gin.Context) {
-		var repo *store.Repo
+		var repo *Repo
 
 		for _, rp := range s.State.Repos {
 			if rp.RepoOwner.Username == c.Param("username") &&

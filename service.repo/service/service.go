@@ -12,7 +12,7 @@ import (
 type Service struct {
 	Name   string
 	Port   string
-	Engine *gin.Engine
+	Router *gin.Engine
 	Store  *store.Engine
 }
 
@@ -33,14 +33,14 @@ func (s *Service) Initialize() {
 	s.Store.InitializeState()
 
 	// Initialize service engine
-	s.Engine = gin.Default()
+	s.Router = gin.Default()
 
-	s.Engine.Use(gin.Logger())
-	s.Engine.Use(gin.Recovery())
+	s.Router.Use(gin.Logger())
+	s.Router.Use(gin.Recovery())
 
-	routes.AddRepoRoutes(s.Store, s.Engine)
+	routes.AddRepoRoutes(s.Store, s.Router)
 }
 
 func (s *Service) Run() {
-	s.Engine.Run(fmt.Sprintf(":%s", s.Port))
+	s.Router.Run(fmt.Sprintf(":%s", s.Port))
 }

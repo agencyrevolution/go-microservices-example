@@ -1,5 +1,7 @@
 package store
 
+import . "github.com/agencyrevolution/go-microservices-example/models"
+
 type Engine struct {
 	State *State
 }
