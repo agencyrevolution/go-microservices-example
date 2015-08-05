@@ -2,18 +2,20 @@ package service
 
 import (
 	"fmt"
-
-	"github.com/agencyrevolution/go-microservices-example/service.repo/store"
+	"time"
 
 	"github.com/agencyrevolution/go-microservices-example/service.repo/routes"
+	"github.com/agencyrevolution/go-microservices-example/service.repo/store"
+	"github.com/agencyrevolution/go-microservices-example/utils"
 	"github.com/gin-gonic/gin"
 )
 
 type Service struct {
-	Name   string
-	Port   string
-	Router *gin.Engine
-	Store  *store.Engine
+	Name          string
+	Port          string
+	Router        *gin.Engine
+	Store         *store.Engine
+	VulcandClient *utils.VulcandClient
 }
 
 func New() *Service {
@@ -27,6 +29,9 @@ func (s *Service) Initialize() {
 	c := getOptions()
 
 	s.Port = c.Port
+
+	// Initialize vulcan client
+	s.VulcandClient = utils.NewVulcanClient(s.Name, s.Port, 10*time.Second)
 
 	// Initialize store
 	s.Store = store.New()
@@ -43,4 +48,8 @@ func (s *Service) Initialize() {
 
 func (s *Service) Run() {
 	s.Router.Run(fmt.Sprintf(":%s", s.Port))
+}
+
+func (s *Service) KeepAlive() {
+	s.VulcandClient.KeepAlive()
 }
