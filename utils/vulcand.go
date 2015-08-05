@@ -19,7 +19,7 @@ type VulcandClient struct {
 	TTL       time.Duration
 }
 
-func NewVulcanClient(bid string, port string, ttl time.Duration) *VulcandClient {
+func NewVulcandClient(bid string, port string, ttl time.Duration) *VulcandClient {
 	return &VulcandClient{
 		Addr:      os.Getenv("VULCAND_ADDR"),
 		Version:   os.Getenv("VULCAND_VER"),
@@ -40,7 +40,7 @@ func (vc *VulcandClient) UpsertBackend() {
 		vc.BackendId,
 	)
 
-	_, body, err := gorequest.New().
+	gorequest.New().
 		Post(vc.endpoint("backends")).
 		Send(reqBody).
 		End()

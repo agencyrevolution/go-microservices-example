@@ -31,7 +31,7 @@ func (s *Service) Initialize() {
 	s.Port = c.Port
 
 	// Initialize vulcan client
-	s.VulcandClient = utils.NewVulcanClient(s.Name, s.Port, 10*time.Second)
+	s.VulcandClient = utils.NewVulcandClient(s.Name, s.Port, 10*time.Second)
 
 	// Initialize store
 	s.Store = store.New()

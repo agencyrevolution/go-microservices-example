@@ -1,6 +1,7 @@
-#Repo service
-This microservice means to things with repos. Currently having `GET /users/:username/repos` and `GET /users/:username/repos/:reponame`.
-#Run
+#User Service
+Currently having `GET /users` and `GET /users/:username`.
+
+##Run
 ```
 go run *.go [--port <port>]
 ```
