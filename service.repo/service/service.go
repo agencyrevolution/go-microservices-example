@@ -3,10 +3,10 @@ package service
 import (
 	"fmt"
 
-	"github.com/quangbuule/go-microservices-example/service.repo/store"
+	"github.com/agencyrevolution/go-microservices-example/service.repo/store"
 
+	"github.com/agencyrevolution/go-microservices-example/service.repo/routes"
 	"github.com/gin-gonic/gin"
-	"github.com/quangbuule/go-microservices-example/service.repo/routes"
 )
 
 type Service struct {

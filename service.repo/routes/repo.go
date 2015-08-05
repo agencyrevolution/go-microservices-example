@@ -3,8 +3,8 @@ package routes
 import (
 	"net/http"
 
+	"github.com/agencyrevolution/go-microservices-example/service.repo/store"
 	"github.com/gin-gonic/gin"
-	"github.com/quangbuule/go-microservices-example/service.repo/store"
 )
 
 func AddRepoRoutes(s *store.Engine, r *gin.Engine) {
