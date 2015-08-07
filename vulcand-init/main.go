@@ -13,5 +13,5 @@ func main() {
 	utils.VulcandUpsertFrontend("getRepo", "/users/<username>/repos/<reponame>", "service.repo")
 
 	// Upsert listener
-	utils.VulcandUpsertListener("demo", "", "localhost:3004")
+	utils.VulcandUpsertListener("demo", "", "0.0.0.0:3004")
 }
