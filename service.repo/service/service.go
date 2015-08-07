@@ -51,6 +51,3 @@ func (s *Service) Run() {
 	s.VulcandClient.KeepAlive()
 	s.Router.Run(fmt.Sprintf(":%s", s.Port))
 }
-
-func (s *Service) KeepAlive() {
-}

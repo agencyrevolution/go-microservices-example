@@ -5,6 +5,5 @@ import "github.com/agencyrevolution/go-microservices-example/service.repo/servic
 func main() {
 	s := service.New()
 	s.Initialize()
-	s.KeepAlive()
 	s.Run()
 }
