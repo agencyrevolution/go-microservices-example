@@ -19,6 +19,61 @@ type VulcandClient struct {
 	TTL       time.Duration
 }
 
+func VulcandUpsertBackend(bid string) {
+	vc := &VulcandClient{
+		Addr:    os.Getenv("VULCAND_ADDR"),
+		Version: os.Getenv("VULCAND_VER"),
+	}
+
+	reqBody := fmt.Sprintf(
+		`{"Backend": {"Id":"%s", "Type":"http"}}`,
+		bid,
+	)
+
+	gorequest.New().
+		Post(vc.endpoint("backends")).
+		Send(reqBody).
+		End()
+}
+
+func VulcandUpsertFrontend(fid string, path string, bid string) {
+	vc := &VulcandClient{
+		Addr:    os.Getenv("VULCAND_ADDR"),
+		Version: os.Getenv("VULCAND_VER"),
+	}
+
+	reqBody := fmt.Sprintf(
+		`{"Frontend": {"Id":"%s", "Type": "http", "BackendId": "%s", "Route": "Path(\"%s\")"}}`,
+		fid,
+		bid,
+		path,
+	)
+
+	gorequest.New().
+		Post(vc.endpoint("frontends")).
+		Send(reqBody).
+		End()
+}
+
+func VulcandUpsertListener(lid string, scope string, addr string) {
+	vc := &VulcandClient{
+		Addr:    os.Getenv("VULCAND_ADDR"),
+		Version: os.Getenv("VULCAND_VER"),
+	}
+
+	reqBody := fmt.Sprintf(
+		`{"Listener":{"Id":"%s", "Protocol":"http", "Scope":"%s", "Address":{"Network":"tcp", "Address":"%s"}}}`,
+		lid,
+		scope,
+		addr,
+	)
+
+	gorequest.New().
+		Post(vc.endpoint("listeners")).
+		Send(reqBody).
+		End()
+}
+
 func NewVulcandClient(bid string, port string, ttl time.Duration) *VulcandClient {
 	return &VulcandClient{
 		Addr:      os.Getenv("VULCAND_ADDR"),
@@ -61,7 +116,6 @@ func (vc *VulcandClient) Ping() {
 }
 
 func (vc *VulcandClient) KeepAlive() {
-	vc.UpsertBackend()
 	go vc.Ping()
 
 	ticker := time.NewTicker(vc.TTL / 2)
