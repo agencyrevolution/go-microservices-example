@@ -8,6 +8,7 @@ func main() {
 	utils.VulcandUpsertBackend("service.repo")
 
 	// Upsert frontends
+	utils.VulcandUpsertFrontend("getUsers", "/users", "service.user")
 	utils.VulcandUpsertFrontend("getUser", "/users/<username>", "service.user")
 	utils.VulcandUpsertFrontend("getReposByUsername", "/users/<username>/repos", "service.repo")
 	utils.VulcandUpsertFrontend("getRepo", "/users/<username>/repos/<reponame>", "service.repo")

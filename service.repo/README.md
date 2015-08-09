@@ -7,7 +7,7 @@ Currently having `GET /users/:username/repos` and `GET /users/:username/repos/:r
 
 ##Run
 ```
-VULCAND_ADDR=http://localhost:8182 VULCAND_VER=v2 HOST=localhost go run *.go [--port <port>]
+$ VULCAND_ADDR=http://localhost:8182 HOST=localhost [PORT=<port>] go run *.go
 ```
 
 
@@ -15,11 +15,11 @@ VULCAND_ADDR=http://localhost:8182 VULCAND_VER=v2 HOST=localhost go run *.go [--
 Build:
 
 ```
-docker build -t service.repo .
+$ docker build -t service.repo .
 ```
 
 Run:
 
 ```
-docker run -e VULCAND_ADDR=http://172.17.42.1:8182 -e VULCAND_VER=v2 -e HOST=172.17.42.1 -p <port>:<port> service.repo -p <port>
+$ docker run -e VULCAND_ADDR=http://172.17.42.1:8182 -e HOST=172.17.42.1 [-e PORT=<port>] -p <port>:<port> service.repo
 ```
