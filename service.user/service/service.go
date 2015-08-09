@@ -21,7 +21,7 @@ type Service struct {
 
 func New() *Service {
 	return &Service{
-		Name: "service.repo",
+		Name: "service.user",
 	}
 }
 
