@@ -1,18 +1,17 @@
 package service
 
-import "flag"
+import "os"
 
 type options struct {
 	Port string
 }
 
 func getOptions() *options {
-	// Default options
-	options := &options{}
+	port := os.Getenv("PORT")
 
-	flag.StringVar(&options.Port, "port", "8081", "service port")
+	if port == "" {
+		port = "8081"
+	}
 
-	flag.Parse()
-
-	return options
+	return &options{port}
 }
