@@ -19,10 +19,30 @@ type VulcandClient struct {
 	TTL       time.Duration
 }
 
+func vulcandAddr() string {
+	addr := os.Getenv("VULCAND_ADDR")
+
+	if addr == "" {
+		addr = "http://localhost:8182"
+	}
+
+	return addr
+}
+
+func vulcandVer() string {
+	ver := os.Getenv("VULCAND_VER")
+
+	if ver == "" {
+		ver = "v2"
+	}
+
+	return ver
+}
+
 func VulcandUpsertBackend(bid string) {
 	vc := &VulcandClient{
-		Addr:    os.Getenv("VULCAND_ADDR"),
-		Version: os.Getenv("VULCAND_VER"),
+		Addr:    vulcandAddr(),
+		Version: vulcandVer(),
 	}
 
 	reqBody := fmt.Sprintf(
@@ -38,8 +58,8 @@ func VulcandUpsertBackend(bid string) {
 
 func VulcandUpsertFrontend(fid string, path string, bid string) {
 	vc := &VulcandClient{
-		Addr:    os.Getenv("VULCAND_ADDR"),
-		Version: os.Getenv("VULCAND_VER"),
+		Addr:    vulcandAddr(),
+		Version: vulcandVer(),
 	}
 
 	reqBody := fmt.Sprintf(
@@ -57,8 +77,8 @@ func VulcandUpsertFrontend(fid string, path string, bid string) {
 
 func VulcandUpsertListener(lid string, scope string, addr string) {
 	vc := &VulcandClient{
-		Addr:    os.Getenv("VULCAND_ADDR"),
-		Version: os.Getenv("VULCAND_VER"),
+		Addr:    vulcandAddr(),
+		Version: vulcandVer(),
 	}
 
 	reqBody := fmt.Sprintf(
@@ -75,12 +95,18 @@ func VulcandUpsertListener(lid string, scope string, addr string) {
 }
 
 func NewVulcandClient(bid string, port string, ttl time.Duration) *VulcandClient {
+	host := os.Getenv("HOST")
+
+	if host == "" {
+		host = "localhost"
+	}
+
 	return &VulcandClient{
-		Addr:      os.Getenv("VULCAND_ADDR"),
-		Version:   os.Getenv("VULCAND_VER"),
+		Addr:      vulcandAddr(),
+		Version:   vulcandVer(),
 		BackendId: bid,
 		ServerId:  uuid.New(),
-		ServerURL: fmt.Sprintf("http://%s:%s", os.Getenv("HOST"), port),
+		ServerURL: fmt.Sprintf("http://%s:%s", host, port),
 		TTL:       ttl,
 	}
 }
@@ -89,19 +115,7 @@ func (vc *VulcandClient) endpoint(params ...string) string {
 	return fmt.Sprintf("%s/%s/%s", vc.Addr, vc.Version, strings.Join(params, "/"))
 }
 
-func (vc *VulcandClient) UpsertBackend() {
-	reqBody := fmt.Sprintf(
-		`{"Backend": {"Id":"%s", "Type":"http"}}`,
-		vc.BackendId,
-	)
-
-	gorequest.New().
-		Post(vc.endpoint("backends")).
-		Send(reqBody).
-		End()
-}
-
-func (vc *VulcandClient) Ping() {
+func (vc *VulcandClient) ping() {
 	reqBody := fmt.Sprintf(
 		`{"Server": {"Id":"%s", "URL":"%s"}, "TTL": "%s"}`,
 		vc.ServerId,
@@ -116,12 +130,12 @@ func (vc *VulcandClient) Ping() {
 }
 
 func (vc *VulcandClient) KeepAlive() {
-	go vc.Ping()
+	go vc.ping()
 
 	ticker := time.NewTicker(vc.TTL / 2)
 	go func() {
 		for range ticker.C {
-			vc.Ping()
+			vc.ping()
 		}
 	}()
 }

@@ -48,7 +48,6 @@ func (s *Service) Initialize() {
 }
 
 func (s *Service) Run() {
-	s.VulcandClient.UpsertBackend()
 	s.VulcandClient.KeepAlive()
 	s.Router.Run(fmt.Sprintf(":%s", s.Port))
 }
