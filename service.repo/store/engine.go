@@ -29,16 +29,6 @@ func (e *Engine) InitializeState() {
 			},
 
 			&Repo{
-				Name:            "frontend.react.growthanalyzer",
-				Description:     "An application that graphs customers' potential future revenue when using our product compared to existing growth rates. Once they have gone through the steps they can fill out a form that sends us back information so we can get in touch with them for a consultation.",
-				StargazersCount: 1,
-				RepoOwner: &RepoOwner{
-					ID:       1,
-					Username: "agencyrevolution",
-				},
-			},
-
-			&Repo{
 				Name:            "workflow.microservice.accountlog",
 				Description:     "Log account activities/histories to InfluxDB.",
 				StargazersCount: 1,
@@ -101,6 +91,16 @@ func (e *Engine) InitializeState() {
 			&Repo{
 				Name:            "workflow.rule-engine",
 				Description:     "Rule engine library",
+				StargazersCount: 1,
+				RepoOwner: &RepoOwner{
+					ID:       1,
+					Username: "agencyrevolution",
+				},
+			},
+
+			&Repo{
+				Name:            "frontend.react.growthanalyzer",
+				Description:     "An application that graphs customers' potential future revenue when using our product compared to existing growth rates. Once they have gone through the steps they can fill out a form that sends us back information so we can get in touch with them for a consultation.",
 				StargazersCount: 1,
 				RepoOwner: &RepoOwner{
 					ID:       1,

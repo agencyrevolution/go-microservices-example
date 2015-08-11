@@ -25,6 +25,11 @@ export default function prepareRoute(prepareFn) {
           props: { params, location }
         } = this;
 
+        if (__FIRST__) {
+          __FIRST__ = false;
+          return;
+        }
+
         prepareFn({ store, params, location });
       }
     };

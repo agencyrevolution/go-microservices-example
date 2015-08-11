@@ -20,6 +20,7 @@
   <div id="main">{{{body}}}</div>
   <script>
     __INITIAL_STATE__ = {{{json-stringify initialState}}};
+    __FIRST__ = true;
   </script>
   {{#each jsPaths}}
   <script src="{{.}}"></script>
