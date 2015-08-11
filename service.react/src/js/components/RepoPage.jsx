@@ -23,14 +23,18 @@ export default class RepoPage extends React.Component {
     return (
       <div>
         { !repo ?
-          'loading' :
+          <p>loading</p> :
           <p>
-            <big><strong>{repo.get('name')}</strong></big>:&nbsp;
-            <small>
-              ({repo.get('stargazers_count')}&nbsp;
-                <span className="glyphicon glyphicon-star-empty"></span>)
-            </small> by&nbsp;
+            <h3>
+              {repo.get('name')}
+              <small>
+                &nbsp;({repo.get('stargazers_count')}&nbsp;
+                  <span className="glyphicon glyphicon-star-empty"></span>)
+              </small>
+            </h3>
+            <span>by </span>
             <Link to={`/${username}`}>{username}</Link>
+            <br />
             <br />
             {repo.get('description')}
           </p>

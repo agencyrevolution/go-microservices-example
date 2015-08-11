@@ -5,7 +5,7 @@ import express from 'express';
 import proxy from 'express-http-proxy';
 
 const app = express();
-const env = process.env.NODE_ENV || 'development';
+const env = process.env.NODE_ENV || 'production';
 
 
 // Serve static files

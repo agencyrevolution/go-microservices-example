@@ -59,7 +59,7 @@ export default function render(req, res, layout, { payload }) {
         await prepareRoute({ store, params, location });
       }
 
-      const body = React.renderToStaticMarkup(
+      const body = React.renderToString(
         <Provider {...{ store }}>
           {() => <Router {...{ ...routerState, location, history }} />}
         </Provider>

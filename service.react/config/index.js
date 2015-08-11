@@ -2,7 +2,7 @@
 
 import _ from 'lodash';
 
-const { addr, apiAddr } = process.env;
+const { PORT, API_ADDR } = process.env;
 
 export default {
   /**
@@ -10,14 +10,14 @@ export default {
    */
   server: {
     host: 'localhost',
-    port: addr ? parseInt(_.last(addr.toString().split(':'))) : 8080
+    port: PORT || 3003
   },
 
   /**
    * API Server
    */
   apiServer: {
-    urlPrefix: apiAddr || 'https://api.github.com'
+    urlPrefix: API_ADDR || 'http://localhost:3004'
   },
 
   /**
@@ -25,7 +25,7 @@ export default {
    */
   webpackDevServer: {
     host: 'localhost',
-    port: 8081
+    port: 9091
   },
 
   /**
@@ -33,6 +33,6 @@ export default {
    */
   browserSyncServer: {
     host: 'localhost',
-    port: 8082
+    port: 9092
   }
 };

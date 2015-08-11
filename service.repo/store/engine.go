@@ -17,6 +17,97 @@ func New() *Engine {
 func (e *Engine) InitializeState() {
 	s := &State{
 		Repos: []*Repo{
+
+			&Repo{
+				Name:            "frontend.react.revolution",
+				Description:     "Frontend app for our automation marketing built by React & Flux",
+				StargazersCount: 1,
+				RepoOwner: &RepoOwner{
+					ID:       1,
+					Username: "agencyrevolution",
+				},
+			},
+
+			&Repo{
+				Name:            "frontend.react.growthanalyzer",
+				Description:     "An application that graphs customers' potential future revenue when using our product compared to existing growth rates. Once they have gone through the steps they can fill out a form that sends us back information so we can get in touch with them for a consultation.",
+				StargazersCount: 1,
+				RepoOwner: &RepoOwner{
+					ID:       1,
+					Username: "agencyrevolution",
+				},
+			},
+
+			&Repo{
+				Name:            "workflow.microservice.accountlog",
+				Description:     "Log account activities/histories to InfluxDB.",
+				StargazersCount: 1,
+				RepoOwner: &RepoOwner{
+					ID:       1,
+					Username: "agencyrevolution",
+				},
+			},
+
+			&Repo{
+				Name:            "workflow.microservice.apiserver",
+				Description:     "API Server, used as proxy to other microservices",
+				StargazersCount: 1,
+				RepoOwner: &RepoOwner{
+					ID:       1,
+					Username: "agencyrevolution",
+				},
+			},
+
+			&Repo{
+				Name:            "workflow.worker.eventdetector",
+				Description:     "Event Detector",
+				StargazersCount: 1,
+				RepoOwner: &RepoOwner{
+					ID:       1,
+					Username: "agencyrevolution",
+				},
+			},
+
+			&Repo{
+				Name:            "workflow.worker.email",
+				Description:     "Sending email using mandrill API.",
+				StargazersCount: 1,
+				RepoOwner: &RepoOwner{
+					ID:       1,
+					Username: "agencyrevolution",
+				},
+			},
+
+			&Repo{
+				Name:            "workflow.microservice.url-checker.golang",
+				Description:     "Check avaibility of the input URL",
+				StargazersCount: 1,
+				RepoOwner: &RepoOwner{
+					ID:       1,
+					Username: "agencyrevolution",
+				},
+			},
+
+			&Repo{
+				Name:            "workflow.microservice.form",
+				Description:     "Form API",
+				StargazersCount: 1,
+				RepoOwner: &RepoOwner{
+					ID:       1,
+					Username: "agencyrevolution",
+				},
+			},
+
+			&Repo{
+				Name:            "workflow.rule-engine",
+				Description:     "Rule engine library",
+				StargazersCount: 1,
+				RepoOwner: &RepoOwner{
+					ID:       1,
+					Username: "agencyrevolution",
+				},
+			},
+
 			&Repo{
 				Name:            "react",
 				Description:     "A declarative, efficient, and flexible JavaScript library for building user interfaces.",

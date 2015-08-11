@@ -1,31 +1,36 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { prepareRoute } from '../decorators';
-import * as RepoActionCreators from '../actions/repo';
-import RepoList from './RepoList';
+import * as UserActionCreators from '../actions/user';
+import { Link } from 'react-router';
 
 @prepareRoute(async function ({ store, params: { username } }) {
   return await * [
-    store.dispatch(RepoActionCreators.getByUsername(username))
+    store.dispatch(UserActionCreators.getOneByUsername(username))
   ];
 })
-@connect(({ Repo, User }) => ({ Repo, User }))
+@connect(({ User }) => ({ User }))
 class UserPage extends React.Component {
 
   render () {
     const {
       props: {
-        Repo,
+        User,
         params: { username }
       }
     } = this;
 
-    const repos = Repo.get(`users/${username}`);
+    const user = User.get(username);
 
     return (
       <div>
-        <h4>Repositories:</h4>
-        {repos ? <RepoList {...{ repos, username }} /> : 'Loading...'}
+        <h3>{user ? username : 'Loading...'}</h3>
+        <div>
+          {user ? user.get('description') : 'Loading...'}
+        </div>
+        <Link to={`/${username}/repos`}>
+          View repositories
+        </Link>
       </div>
     );
   }

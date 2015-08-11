@@ -17,8 +17,9 @@ class RepoListItem extends React.Component {
       <li>
         <p>
           <Link to={`/${username}/${repo.get('name')}`}>
-            <big><strong>{repo.get('name')}</strong></big>:&nbsp;
+            <big><strong>{repo.get('name')}</strong></big>:
           </Link>
+          <span> </span>
           <small>
             ({repo.get('stargazers_count')}&nbsp;
               <span className="glyphicon glyphicon-star-empty"></span>)

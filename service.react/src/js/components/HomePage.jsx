@@ -18,9 +18,11 @@ class UserPage extends React.Component {
       <div>
         <h3>Github</h3>
           {users && users.map(user =>
-            <Link to={`/${user.get('name')}`}>
-              {user.get('name')}
-            </Link>
+            <div key={user.get('id')}>
+              <Link to={`/${user.get('name')}`}>
+                {user.get('name')}
+              </Link>
+            </div>
           )}
       </div>
     );

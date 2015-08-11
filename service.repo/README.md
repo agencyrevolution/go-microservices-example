@@ -1,13 +1,22 @@
-#Repo Service
-Currently having `GET /users/:username/repos` and `GET /users/:username/repos/:reponame`.
+#React Service
+This is front-end service.
 
 ##Prerequisites
-- etcd (`go install github.com/coreos/etcd`)
-- vulcand (`go install github.com/mailgun/vulcand`)
+- node.js
+- `service.repo` started
+- `service.user` started
+
+##Build
+```
+$ npm install
+...
+$ npm run build
+```
+
 
 ##Run
 ```
-$ VULCAND_ADDR=http://localhost:8182 HOST=localhost [PORT=<port>] go run *.go
+$ API_ADDR=http://localhost:3004 [PORT=3003] npm start
 ```
 
 
@@ -15,11 +24,11 @@ $ VULCAND_ADDR=http://localhost:8182 HOST=localhost [PORT=<port>] go run *.go
 Build:
 
 ```
-$ docker build -t service.repo .
+$ docker build -t react .
 ```
 
 Run:
 
 ```
-$ docker run -e VULCAND_ADDR=http://172.17.42.1:8182 -e HOST=172.17.42.1 [-e PORT=<port>] -p <port>:<port> service.repo
+$ docker run -e API_ADDR=http://172.17.42.1:3004 -e HOST=172.17.42.1 [-e PORT=<port>] -p <port>:<port> react
 ```
